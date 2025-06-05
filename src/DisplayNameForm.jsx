@@ -5,7 +5,7 @@ const DisplayNameForm = () => {
     {
       firstName: "",
       lastName: "",
-
+    fullName:"",
     }
   );
 
@@ -25,10 +25,12 @@ const DisplayNameForm = () => {
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          setFormData({
-            firstName: e.target.firstName.value,
-            lastName: e.target.lastName.value,
-          });
+          setFormData(
+            {
+              ...formData,
+              fullName: `${formData.firstName} ${formData.lastName}`,
+            }
+          )
         }}
       >
         <h1>Full Name Display</h1>
@@ -41,7 +43,12 @@ const DisplayNameForm = () => {
             value={formData.firstName}
             style={{ padding: "4px" }}
             required
-
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                firstName: e.target.value,
+              })
+            }}
    
           />
         </label>
@@ -54,14 +61,20 @@ const DisplayNameForm = () => {
             value={formData.lastName}
             style={{ padding: "4px" }}
             required
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                lastName: e.target.value,
+              })
+            }}
 
           />
         </label>
 
         <button type="submit">submit</button>
 
-        {formData.firstName && formData.lastName && (
-          <h2>{`Full Name: ${formData.firstName} ${formData.lastName}`}</h2>
+        {formData.fullName && (
+          <h2>{`Full Name: ${formData.fullName}`}</h2>
         )}
       </form>
     </>
