@@ -56,7 +56,7 @@ const DisplayNameForm = () => {
         <button type="submit">submit</button>
 
         {formData?.firstName && formData?.lastName && (
-          <h2>{`Full Name: ${formData.firstName} ${formData.firstName}`}</h2>
+          <h2>{`Full Name: ${formData.firstName} ${formData.lastName}`}</h2>
         )}
       </form>
     </>
