@@ -37,14 +37,7 @@ const DisplayNameForm = () => {
             value={formData.firstName}
             style={{ padding: "4px" }}
             required
-            onChange={(e)=>{
-                setFormData(
-                    {
-                    ...formData,
-                    firstName: e.target.value
-                    }
-                )
-            }}
+   
           />
         </label>
 
@@ -56,14 +49,7 @@ const DisplayNameForm = () => {
             value={formData.lastName}
             style={{ padding: "4px" }}
             required
-                        onChange={(e)=>{
-                setFormData(
-                    {
-                    ...formData,
-                    lastName: e.target.value
-                    }
-                )
-            }}
+
           />
         </label>
 
