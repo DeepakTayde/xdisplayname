@@ -1,12 +1,16 @@
 import { useState } from "react";
 
 const DisplayNameForm = () => {
-  const [formData, setFormData] = useState([
+  const [formData, setFormData] = useState(
     {
       firstName: "",
       lastName: "",
-    },
-  ]);
+
+    }
+  );
+
+  const [formSubmitted, setFormSubmitted]=useState(false);
+
   return (
     <>
       <form
@@ -21,10 +25,7 @@ const DisplayNameForm = () => {
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          setFormData({
-            firstName: e.target.firstName.value,
-            lastName: e.target.lastName.value,
-          });
+          setFormSubmitted(true)
         }}
       >
         <h1>Full Name Display</h1>
@@ -37,6 +38,12 @@ const DisplayNameForm = () => {
             value={formData.firstName}
             style={{ padding: "4px" }}
             required
+            onChange={(e) => {
+              setFormData((prev) => ({
+                ...prev,
+                firstName: e.target.value,
+              }));
+            }}
    
           />
         </label>
@@ -49,13 +56,19 @@ const DisplayNameForm = () => {
             value={formData.lastName}
             style={{ padding: "4px" }}
             required
+            onChange={(e) => {
+              setFormData((prev) => ({
+                ...prev,
+                lastName: e.target.value,
+              }));
+            }}
 
           />
         </label>
 
         <button type="submit">submit</button>
 
-        {formData?.firstName && formData?.lastName && (
+        {formSubmitted && formData.firstName && formData.lastName && (
           <h2>{`Full Name: ${formData.firstName} ${formData.lastName}`}</h2>
         )}
       </form>
