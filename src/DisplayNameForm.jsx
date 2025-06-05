@@ -1,18 +1,21 @@
 import { useState } from "react";
 
 const DisplayNameForm = () => {
-  const [formData, setFormData] = useState(
-    {
-      firstName: "",
-      lastName: "",
-    fullName:"",
-    }
-  );
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
-
+  const [fullName, setFullName] = useState("");
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "left",
+      }}
+    >
       <form
         style={{
           display: "flex",
@@ -25,12 +28,9 @@ const DisplayNameForm = () => {
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          setFormData(
-            {
-              ...formData,
-              fullName: `${formData.firstName} ${formData.lastName}`,
-            }
-          )
+          if(firstName && lastName) {
+            setFullName(`${firstName} ${lastName}`);
+          }
         }}
       >
         <h1>Full Name Display</h1>
@@ -40,16 +40,10 @@ const DisplayNameForm = () => {
           <input
             type="text"
             name="firstName"
-            value={formData.firstName}
+            value={firstName}
             style={{ padding: "4px" }}
             required
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                firstName: e.target.value,
-              })
-            }}
-   
+            onChange={(e) => setFirstName(e.target.value)}
           />
         </label>
 
@@ -58,26 +52,19 @@ const DisplayNameForm = () => {
           <input
             type="text"
             name="lastName"
-            value={formData.lastName}
+            value={lastName}
             style={{ padding: "4px" }}
             required
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                lastName: e.target.value,
-              })
-            }}
-
+            onChange={(e) => setLastName(e.target.value)}
           />
         </label>
 
         <button type="submit">submit</button>
-
-        {formData.fullName && (
-          <h2>{`Full Name: ${formData.fullName}`}</h2>
-        )}
       </form>
-    </>
+      
+        {fullName && <p style={{ textAlign: "center", fontFamily: "times new roman" }}>{`Full Name: ${fullName}`}</p>}
+      
+    </div>
   );
 };
 
